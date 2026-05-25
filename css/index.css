@@ -13,9 +13,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0px;
-  background-color: #83a17157;
-  border-radius: 10px;
+  background-color: #ffffff57;
+  border-radius: 1px;
   margin-top: 20px; 
+  border: 2px solid #82171b;
 }
 
 .nav{
@@ -29,7 +30,7 @@ header {
 .aviso{
 background-color: #eceeea57;
 border-radius: 10px;  
-margin-left: 75%;
+margin-left: 70%;
 font-family: 'Comfortaa';
 text-align: center;
 margin-top: 10px;
@@ -37,12 +38,35 @@ border: 2px solid #82171b;
 font-size: 12px;
 
 }
-.opciones ul {
+
+.patatas{
   display: flex;
-  gap: 20px;
-  flex-direction: row;
+  justify-content: space-between;
+  font-family: 'Comfortaa';
+  gap: 60px;
+  margin-top: 20px;
+  
+  padding: 10px;
 }
 
+
+.opciones ul {
+  display: flex;
+ 
+  flex-direction: row;
+}
+.nav-links {
+  margin-left: -8%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*flex-wrap: wrap; para que las opciones se ajusten a la pantalla en dispositivos móviles*/
 #carta{
 display: flex;
 flex-wrap: wrap;
@@ -66,9 +90,13 @@ text-decoration: none;
 }
 
 .logo img {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   justify-content: center;
+  padding: 0px;
+  margin: 0px;
+  margin-top: -50px;
+  margin-bottom: -50px;
 
 }
 footer img{
