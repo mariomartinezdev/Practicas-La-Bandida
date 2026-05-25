@@ -201,3 +201,10 @@ footer {
   font-weight: bold;
   color: #82171b;
 }
+
+
+/* aqui estará el estilo de la pagina de contacto */
+
+#contacto{
+  font-family: 'Comfortaa';
+}
