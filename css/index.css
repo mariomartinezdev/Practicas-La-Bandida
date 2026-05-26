@@ -255,7 +255,7 @@ footer {
   font-family: 'Comfortaa';
 }
 
-/* Cambia esto en tu index.css para que afecte a ambas secciones de la carta */
+
 .carta {
   display: flex;
   flex-wrap: wrap;
