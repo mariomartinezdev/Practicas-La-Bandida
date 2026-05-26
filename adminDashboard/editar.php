@@ -12,12 +12,12 @@ $tipo_mensaje = "success";
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Verificar que exista el elemento a editar
-$stmt = $pdo->prepare("SELECT * FROM hamburguesas WHERE id = ?");
+$stmt = $pdo->prepare("SELECT * FROM platos WHERE id = ?");
 $stmt->execute([$id]);
-$hamburguesa = $stmt->fetch(PDO::FETCH_ASSOC);
+$plato = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$hamburguesa) {
-    die("Hamburguesa no encontrada.");
+if (!$plato) {
+    die("plato no encontrada.");
 }
 
 // Procesar Formulario de Modificación
@@ -33,16 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_edit'])) {
             $pdo->beginTransaction();
 
             // Actualizar tabla principal
-            $stmt_up = $pdo->prepare("UPDATE hamburguesas SET nombre = ?, precio = ?, categoria_id = ? WHERE id = ?");
+            $stmt_up = $pdo->prepare("UPDATE platos SET nombre = ?, precio = ?, categoria_id = ? WHERE id = ?");
             $stmt_up->execute([$nombre, $precio, $categoria_id, $id]);
 
             // Limpiar relaciones previas
-            $pdo->prepare("DELETE FROM hamburguesa_ingredientes WHERE hamburguesa_id = ?")->execute([$id]);
-            $pdo->prepare("DELETE FROM hamburguesa_alergenos WHERE hamburguesa_id = ?")->execute([$id]);
+            $pdo->prepare("DELETE FROM plato_ingredientes WHERE plato_id = ?")->execute([$id]);
+            $pdo->prepare("DELETE FROM plato_alergenos WHERE plato_id = ?")->execute([$id]);
 
             // Reinsertar ingredientes seleccionados
             if (!empty($ingredientes_sel)) {
-                $stmt_ing = $pdo->prepare("INSERT INTO hamburguesa_ingredientes (hamburguesa_id, ingrediente_id) VALUES (?, ?)");
+                $stmt_ing = $pdo->prepare("INSERT INTO plato_ingredientes (plato_id, ingrediente_id) VALUES (?, ?)");
                 foreach ($ingredientes_sel as $ing_id) {
                     $stmt_ing->execute([$id, $ing_id]);
                 }
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_edit'])) {
 
             // Reinsertar alérgenos seleccionados
             if (!empty($alergenos_sel)) {
-                $stmt_ale = $pdo->prepare("INSERT INTO hamburguesa_alergenos (hamburguesa_id, alergeno_id) VALUES (?, ?)");
+                $stmt_ale = $pdo->prepare("INSERT INTO plato_alergenos (plato_id, alergeno_id) VALUES (?, ?)");
                 foreach ($alergenos_sel as $ale_id) {
                     $stmt_ale->execute([$id, $ale_id]);
                 }
@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_edit'])) {
             
             // Recargar datos actualizados
             $stmt->execute([$id]);
-            $hamburguesa = $stmt->fetch(PDO::FETCH_ASSOC);
-            $mensaje = "Hamburguesa modificada correctamente.";
+            $plato = $stmt->fetch(PDO::FETCH_ASSOC);
+            $mensaje = "plato modificada correctamente.";
             
         } catch (Exception $e) {
             $pdo->rollBack();
@@ -80,15 +80,15 @@ $ingredientes = $pdo->query("SELECT * FROM ingredientes")->fetchAll(PDO::FETCH_A
 $alergenos = $pdo->query("SELECT * FROM alergenos")->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener ingredientes y alérgenos ya marcados previamente en este elemento
-$ingredientes_actuales = $pdo->query("SELECT ingrediente_id FROM hamburguesa_ingredientes WHERE hamburguesa_id = $id")->fetchAll(PDO::FETCH_COLUMN);
-$alergenos_actuales = $pdo->query("SELECT alergeno_id FROM hamburguesa_alergenos WHERE hamburguesa_id = $id")->fetchAll(PDO::FETCH_COLUMN);
+$ingredientes_actuales = $pdo->query("SELECT ingrediente_id FROM plato_ingredientes WHERE plato_id = $id")->fetchAll(PDO::FETCH_COLUMN);
+$alergenos_actuales = $pdo->query("SELECT alergeno_id FROM plato_alergenos WHERE plato_id = $id")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Modificar Hamburguesa</title>
+    <title>Modificar plato</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -109,25 +109,25 @@ $alergenos_actuales = $pdo->query("SELECT alergeno_id FROM hamburguesa_alergenos
     <?php endif; ?>
 
     <div class="card">
-        <h2>Editar: <?php echo htmlspecialchars($hamburguesa['nombre']); ?></h2>
+        <h2>Editar: <?php echo htmlspecialchars($plato['nombre']); ?></h2>
         <form action="editar.php?id=<?php echo $id; ?>" method="POST">
             <input type="hidden" name="action_edit" value="1">
 
             <div class="form-group">
-                <label>Nombre de Hamburguesa</label>
-                <input type="text" name="nombre" class="form-control" value="<?php echo htmlspecialchars($hamburguesa['nombre']); ?>" required>
+                <label>Nombre de plato</label>
+                <input type="text" name="nombre" class="form-control" value="<?php echo htmlspecialchars($plato['nombre']); ?>" required>
             </div>
             
             <div class="form-group">
                 <label>Precio (€)</label>
-                <input type="number" name="precio" step="0.01" class="form-control" value="<?php echo htmlspecialchars($hamburguesa['precio']); ?>" required>
+                <input type="number" name="precio" step="0.01" class="form-control" value="<?php echo htmlspecialchars($plato['precio']); ?>" required>
             </div>
 
             <div class="form-group">
                 <label>Categoría</label>
                 <select name="categoria_id" class="form-control" required>
                     <?php foreach($categorias as $cat): ?>
-                        <option value="<?php echo $cat['id']; ?>" <?php echo ($hamburguesa['categoria_id'] == $cat['id']) ? 'selected' : ''; ?>>
+                        <option value="<?php echo $cat['id']; ?>" <?php echo ($plato['categoria_id'] == $cat['id']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($cat['nombre']); ?>
                         </option>
                     <?php endforeach; ?>

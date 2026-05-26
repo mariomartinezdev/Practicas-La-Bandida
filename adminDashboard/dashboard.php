@@ -16,8 +16,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $id = intval($_GET['id']);
     
     try {
-        if ($tipo == 'hamburguesa') {
-            $stmt = $pdo->prepare("DELETE FROM hamburguesas WHERE id = ?");
+        if ($tipo == 'plato') {
+            $stmt = $pdo->prepare("DELETE FROM platos WHERE id = ?");
             $stmt->execute([$id]);
         } elseif ($tipo == 'ingrediente') {
             $stmt = $pdo->prepare("DELETE FROM ingredientes WHERE id = ?");
@@ -41,7 +41,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_add'])) {
     $tipo = $_POST['tipo_elemento'];
     
-    if ($tipo == 'hamburguesa') {
+    if ($tipo == 'plato') {
         $nombre = trim($_POST['nombre']);
         $precio = floatval($_POST['precio']);
         $categoria_id = intval($_POST['categoria_id']);
@@ -52,35 +52,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_add'])) {
             try {
                 $pdo->beginTransaction();
                 
-                $stmt = $pdo->prepare("INSERT INTO hamburguesas (nombre, precio, categoria_id) VALUES (?, ?, ?)");
+                $stmt = $pdo->prepare("INSERT INTO platos (nombre, precio, categoria_id) VALUES (?, ?, ?)");
                 $stmt->execute([$nombre, $precio, $categoria_id]);
-                $hamburguesa_id = $pdo->lastInsertId();
+                $plato_id = $pdo->lastInsertId();
                 
                 // Insertar ingredientes
                 if (!empty($ingredientes_sel)) {
-                    $stmt_ing = $pdo->prepare("INSERT INTO hamburguesa_ingredientes (hamburguesa_id, ingrediente_id) VALUES (?, ?)");
+                    $stmt_ing = $pdo->prepare("INSERT INTO plato_ingredientes (plato_id, ingrediente_id) VALUES (?, ?)");
                     foreach ($ingredientes_sel as $ing_id) {
-                        $stmt_ing->execute([$hamburguesa_id, $ing_id]);
+                        $stmt_ing->execute([$plato_id, $ing_id]);
                     }
                 }
                 
                 // Insertar alérgenos
                 if (!empty($alergenos_sel)) {
-                    $stmt_ale = $pdo->prepare("INSERT INTO hamburguesa_alergenos (hamburguesa_id, alergeno_id) VALUES (?, ?)");
+                    $stmt_ale = $pdo->prepare("INSERT INTO plato_alergenos (plato_id, alergeno_id) VALUES (?, ?)");
                     foreach ($alergenos_sel as $ale_id) {
-                        $stmt_ale->execute([$hamburguesa_id, $ale_id]);
+                        $stmt_ale->execute([$plato_id, $ale_id]);
                     }
                 }
                 
                 $pdo->commit();
-                $mensaje = "Hamburguesa agregada con éxito.";
+                $mensaje = "plato agregada con éxito.";
             } catch (Exception $e) {
                 $pdo->rollBack();
-                $mensaje = "Error al agregar hamburguesa: " . $e->getMessage();
+                $mensaje = "Error al agregar plato: " . $e->getMessage();
                 $tipo_mensaje = "danger";
             }
         } else {
-            $mensaje = "Por favor, rellene todos los campos obligatorios de la hamburguesa.";
+            $mensaje = "Por favor, rellene todos los campos obligatorios de la plato.";
             $tipo_mensaje = "danger";
         }
     } else if ($tipo == 'ingrediente' || $tipo == 'alergeno') {
@@ -105,14 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_add'])) {
 // --- CONSULTA FILTRADA POR CATEGORÍA O LISTADO GLOBAL ---
 $categoria_filtro = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
-$query_hamb = "SELECT h.*, c.nombre AS categoria FROM hamburguesas h 
+$query_hamb = "SELECT h.*, c.nombre AS categoria FROM platos h 
                LEFT JOIN categorias c ON h.categoria_id = c.id";
 if ($categoria_filtro > 0) {
     $query_hamb .= " WHERE h.categoria_id = " . $categoria_filtro;
 }
 $query_hamb .= " ORDER BY h.id DESC";
 
-$hamburguesas = $pdo->query($query_hamb)->fetchAll(PDO::FETCH_ASSOC);
+$platos = $pdo->query($query_hamb)->fetchAll(PDO::FETCH_ASSOC);
 $categorias = $pdo->query("SELECT * FROM categorias")->fetchAll(PDO::FETCH_ASSOC);
 $ingredientes = $pdo->query("SELECT * FROM ingredientes")->fetchAll(PDO::FETCH_ASSOC);
 $alergenos = $pdo->query("SELECT * FROM alergenos")->fetchAll(PDO::FETCH_ASSOC);
@@ -155,15 +155,15 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
             <!-- COLUNA IZQUIERDA: FORMULARIOS DE ALTA -->
             <div class="col col-30">
                 
-                <!-- Añadir Hamburguesa -->
+                <!-- Añadir plato -->
                 <div class="card">
-                    <h3>+ Hamburguesa</h3>
+                    <h3>+ Plato</h3>
                     <form action="dashboard.php" method="POST">
                         <input type="hidden" name="action_add" value="1">
-                        <input type="hidden" name="tipo_elemento" value="hamburguesa">
+                        <input type="hidden" name="tipo_elemento" value="plato">
                         
                         <div class="form-group">
-                            <label>Nombre de Hamburguesa*</label>
+                            <label>Nombre de plato*</label>
                             <input type="text" name="nombre" class="form-control" required>
                         </div>
                         <div class="form-group">
@@ -202,7 +202,7 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Guardar Hamburguesa</button>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Guardar plato</button>
                     </form>
                 </div>
 
@@ -235,7 +235,7 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
                 <!-- Caja de Filtro por Categoría -->
                 <div class="card" style="background-color: #ebedef;">
                     <form action="dashboard.php" method="GET">
-                        <label style="font-weight: bold; margin-right: 10px;">Filtrar Lista de Hamburguesas por Categoría:</label>
+                        <label style="font-weight: bold; margin-right: 10px;">Filtrar Lista de platos por Categoría:</label>
                         <select name="cat_id" onchange="this.form.submit()" class="form-control" style="width: auto; display: inline-block;">
                             <option value="0">--- Mostrar Todas ---</option>
                             <?php foreach($categorias as $cat): ?>
@@ -248,9 +248,9 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
                     </form>
                 </div>
 
-                <!-- Tabla General de Hamburguesas -->
+                <!-- Tabla General de platos -->
                 <div class="card">
-                    <h2>Listado de Hamburguesas</h2>
+                    <h2>Listado de platos</h2>
                     <table>
                         <thead>
                             <tr>
@@ -263,17 +263,17 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if(empty($hamburguesas)): ?>
-                                <tr><td colspan="6" style="text-align:center;">No hay hamburguesas registradas en esta categoría.</td></tr>
+                            <?php if(empty($platos)): ?>
+                                <tr><td colspan="6" style="text-align:center;">No hay platos registradas en esta categoría.</td></tr>
                             <?php else: ?>
-                                <?php foreach($hamburguesas as $h): 
+                                <?php foreach($platos as $h): 
                                     // Obtener ingredientes asignados
-                                    $stmt_h_ing = $pdo->prepare("SELECT i.nombre FROM hamburguesa_ingredientes hi JOIN ingredientes i ON hi.ingrediente_id = i.id WHERE hi.hamburguesa_id = ?");
+                                    $stmt_h_ing = $pdo->prepare("SELECT i.nombre FROM plato_ingredientes hi JOIN ingredientes i ON hi.ingrediente_id = i.id WHERE hi.plato_id = ?");
                                     $stmt_h_ing->execute([$h['id']]);
                                     $h_ingredientes = $stmt_h_ing->fetchAll(PDO::FETCH_COLUMN);
 
                                     // Obtener alérgenos asignados
-                                    $stmt_h_ale = $pdo->prepare("SELECT a.nombre FROM hamburguesa_alergenos ha JOIN alergenos a ON ha.alergeno_id = a.id WHERE ha.hamburguesa_id = ?");
+                                    $stmt_h_ale = $pdo->prepare("SELECT a.nombre FROM plato_alergenos ha JOIN alergenos a ON ha.alergeno_id = a.id WHERE ha.plato_id = ?");
                                     $stmt_h_ale->execute([$h['id']]);
                                     $h_alergenos = $stmt_h_ale->fetchAll(PDO::FETCH_COLUMN);
                                 ?>
@@ -298,7 +298,7 @@ $usuarios  = $pdo->query("SELECT id,idUsuario,nombre,apellido,grado,fecha_regist
                                     </td>
                                     <td>
                                         <a href="editar.php?id=<?php echo $h['id']; ?>" class="btn btn-warning">Modificar</a>
-                                        <a href="dashboard.php?action=delete&tipo=hamburguesa&id=<?php echo $h['id']; ?>" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar esta hamburguesa?')">Eliminar</a>
+                                        <a href="dashboard.php?action=delete&tipo=plato&id=<?php echo $h['id']; ?>" class="btn btn-danger" onclick="return confirm('¿Seguro de eliminar esta plato?')">Eliminar</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;; ?>
