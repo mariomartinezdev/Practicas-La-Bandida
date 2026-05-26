@@ -30,7 +30,7 @@ header {
 .aviso{
 background-color: #eceeea57;
 border-radius: 10px;  
-margin-left: 70%;
+margin-left: 80%; 
 font-family: 'Comfortaa';
 text-align: center;
 margin-top: 10px;
@@ -41,9 +41,10 @@ font-size: 12px;
 
 .patatas{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   font-family: 'Comfortaa';
-  gap: 60px;
+  gap: 600px;
   margin-top: 20px;
   
   padding: 10px;
@@ -207,4 +208,22 @@ footer {
 
 #contacto{
   font-family: 'Comfortaa';
+}
+
+/* Cambia esto en tu index.css para que afecte a ambas secciones de la carta */
+.carta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+/* Los h2 son los titulos para las secciones de la carta, como "Hamburguesas", "Papas Fritas", etc. */
+h2{
+  font-family: 'Comfortaa';
+  text-align: center;
+  color: #82171b;
+  margin-top: 40px;
+  text-transform: uppercase;
 }
