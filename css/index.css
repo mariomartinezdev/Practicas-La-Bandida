@@ -39,6 +39,8 @@ font-size: 12px;
 
 }
 
+
+
 .patatas{
   display: flex;
   justify-content: center;
@@ -49,7 +51,50 @@ font-size: 12px;
   
   padding: 10px;
 }
+/* Sección de Contacto */
+#contacto {
+    text-align: center;
+    padding: 30px 15px;
+    background-color: #f9f9f9;
+    margin-top: 40px;
+}
 
+#contacto p {
+    margin: 15px 0;
+}
+
+
+#contacto a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none; 
+}
+
+.categorias-nav button {
+    background-color: transparent;
+    border: none;
+    color: #82171b;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Comfortaa';
+border: 2px solid #82171b;
+margin: 5px;
+
+  
+}
+
+
+#contacto .enlace-mapas {
+    text-decoration: underline;
+}
+
+
+#contacto .enlace-instagram {
+    color: #e1306c;
+    font-weight: bold;
+}
 
 .opciones ul {
   display: flex;
