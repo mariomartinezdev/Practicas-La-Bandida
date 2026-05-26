@@ -16,13 +16,14 @@
                     alt="Logo de La Bandida">
             </div>
             <div class="opciones">
-                <ul class="nav-links">
-                    <li><a href="#entrantes">Para compartir</a></li>
-                    <li><a href="#burguers">Burguers</a></li>
-                    <li><a href="#postres">Postres</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
+            <nav class="categorias-nav">
+                <!-- Botones de categoría, ya no son botones que hacen scroll, ahora pueden interactuar con javascript -->
+                <button class="btn-categoria activo" data-filtro="todos">Todos</button>
+                <button class="btn-categoria" data-filtro="entrantes">Para compartir</button>
+                <button class="btn-categoria" data-filtro="burgers">Burgers</button>
+                <button class="btn-categoria" data-filtro="postres">Postres</button>
+            </nav>
+        </div>
         </nav>
     </header>
 
