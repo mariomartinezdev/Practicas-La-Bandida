@@ -28,7 +28,8 @@ CREATE TABLE platos(
     nombre VARCHAR(100) NOT NULL UNIQUE,
     precio DECIMAL(6,2) NOT NULL,
     categoria_id INT,
-    imagen varchar(40),
+    imagen varchar(120) default null,
+	disponible tinyint(1) default 1,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL
 );
 
@@ -107,27 +108,27 @@ INSERT INTO alergenos (nombre) VALUES ('Gluten'), ('Lácteos'), ('Huevo'), ('Mos
 ON DUPLICATE KEY UPDATE nombre=nombre;
 
 INSERT INTO platos (nombre, precio, categoria_id,imagen) VALUES 
-('La Bandida', 12.90, 1,"./archivos/placeHolder_hamburguesa.png"),
-('La trufada', 13.90, 1,"./archivos/placeHolder_hamburguesa.png"),
-('La cabramelizada', 13.00, 1,"./archivos/placeHolder_hamburguesa.png"),
-('Bandida Crispy', 11.00, 1,"./archivos/placeHolder_hamburguesa.png"),
-('La clasica', 13.90, 1,"./archivos/placeHolder_hamburguesa.png"),
-('La mallorquina', 13.90, 1,"./archivos/placeHolder_hamburguesa.png"),
-('La veggie', 13.90, 1,"./archivos/placeHolder_hamburguesa.png"),
-('Croquetas de jamon iberico', 1.50, 2,"./archivos/placeHolderEntrantes.png"),
-('Croquetas de carrillera', 1.50, 2,"./archivos/placeHolderEntrantes.png"),
-('Croqueta de cecina', 1.50, 2,"./archivos/placeHolderEntrantes.png"),
-('Alitas de pollo crujientes con salsa bourbon', 9.00, 2,"./archivos/placeHolderEntrantes.png"),
-('Taco de oreja de cerdo con mayonesa', 3.90, 2,"./archivos/placeHolderEntrantes.png"),
-('Patatas Bacon Cheese', 9.00, 2,"./archivos/placeHolderEntrantes.png"),
-('Torreznos', 8.90, 2,"./archivos/placeHolderEntrantes.png"),
-('Nachos Bandidos', 11.90, 2,"./archivos/placeHolderEntrantes.png"),
-('Costillar de cerdo a baja temperatura con salsa bbq', 15.90, 2,"./archivos/placeHolderEntrantes.png"),
-('Torrija de brioche caramelizada con helado', 5.90, 3,"./archivos/postrePlace.png"),
-('Tarta de queso tradicional al horno', 5.50, 3,"./archivos/postrePlace.png"),
-('Tarta de queso de Lotus', 6.50, 3,"./archivos/postrePlace.png"), 
-('Patatas fritas',1,4,"./archivos/pata.png"),
-('Sweet potatos',2,4,"./archivos/pata.png")
+('La Bandida', 12.90, 1,"Labandida.jpg"),
+('La trufada', 13.90, 1,"placeHolder_hamburguesa.png"),
+('La cabramelizada', 13.00, 1,"cabramelizada.png"),
+('Bandida Crispy', 11.00, 1,"placeHolder_hamburguesa.png"),
+('La clasica', 13.90, 1,"la_clasica.jpg"),
+('La mallorquina', 13.90, 1,"la_mallorquina.jpg"),
+('La veggie', 13.90, 1,"viggie.jpg"),
+('Croquetas de jamon iberico', 1.50, 2,"placeHolderEntrantes.png"),
+('Croquetas de carrillera', 1.50, 2,"placeHolderEntrantes.png"),
+('Croqueta de cecina', 1.50, 2,"placeHolderEntrantes.png"),
+('Alitas de pollo crujientes con salsa bourbon', 9.00, 2,"Alitas.jpg"),
+('Taco de oreja de cerdo con mayonesa', 3.90, 2,"placeHolderEntrantes.png"),
+('Patatas Bacon Cheese', 9.00, 2,"patatas_bacon.jpg"),
+('Torreznos', 8.90, 2,"torreznos.jpg"),
+('Nachos Bandidos', 11.90, 2,"placeHolderEntrantes.png"),
+('Costillar de cerdo a baja temperatura con salsa bbq', 15.90, 2,"placeHolderEntrantes.png"),
+('Torrija de brioche caramelizada con helado', 5.90, 3,"postrePlace.png"),
+('Tarta de queso tradicional al horno', 5.50, 3,"postrePlace.png"),
+('Tarta de queso de Lotus', 6.50, 3,"postrePlace.png"), 
+('Patatas fritas',1,4,"patatas_fritas.jpg"),
+('Sweet potatos',2,4,"sweet_potatoes.jpg")
 ON DUPLICATE KEY UPDATE nombre=nombre;
 
 INSERT INTO plato_ingredientes (plato_id, ingrediente_id) VALUES 

@@ -1,5 +1,5 @@
 <?php 
-require_once './archivos/conexion.php';
+require_once './adminDashboard/conexion.php';
 
 ?>
 
@@ -10,14 +10,15 @@ require_once './archivos/conexion.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Bandida</title>
-    <link rel="stylesheet" href="carta.css">
+    <link rel="stylesheet" href="./archivos/css/carta.css">
+    <link rel="icon" href="archivos/imagenes/logos/LOGOTIPO LA BANDIDA/ILUSTRACIÓN LA BANDIDA/ISOTIPO LINEAS LAPIZ/PNG/LA BANDIDA RAW LINES@4x-8.png" type="image/x-ico">
 </head>
 
 <body>
     <header>
         <nav class="nav">
             <div class="logo">
-                <img src="archivos/LOGOTIPO PNG/LOGO COMPLETO LA BANDIDA_Mesa de trabajo 1 copia.png"
+                <img src="archivos/imagenes/logos/LOGO COMPLETO LA BANDIDA_Mesa de trabajo 1 copia.png"
                     alt="Logo de La Bandida">
             </div>
             <div class="opciones">
@@ -39,7 +40,7 @@ require_once './archivos/conexion.php';
 	
 	if(isset($_GET["sec"]) && ($_GET["sec"] == "1" || $_GET["sec"] == "2")):
 	 
-		$producto = $pdo->query("select imagen,nombre,precio from platos where categoria_id=2")->fetchAll(PDO::FETCH_ASSOC);
+		$producto = $pdo->query("select imagen,nombre,precio,disponible from platos where categoria_id=2")->fetchAll(PDO::FETCH_ASSOC);
 	
 	?>
 	<h2>Para Compartir</h2>
@@ -48,19 +49,19 @@ require_once './archivos/conexion.php';
 	<?php
 			
 		foreach($producto as $p):
-	
+			if($p["disponible"]==1):
 	?>
         <div class="tarjeta_burguer" data-categoria="entrantes" data-nombre="croquetas de jamon iberico">
             <div class="imagen_burguer">
-                <img src="archivos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
-                <img src="<?php echo htmlspecialchars($p['imagen'])?>" alt="Croquetas" class="imagenEncima">
+                <img src="archivos/imagenes/logos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
+                <img src="<?php echo htmlspecialchars("./archivos/imagenes/platos/".$p['imagen'])?>" alt="Croquetas" class="imagenEncima">
             </div>
             <div class="info_burguer">
                 <h3><?php echo htmlspecialchars($p['nombre'])?></h3>
                 <p class="precio"><?php echo $p['precio']?>€</p>
             </div>
         </div>
-        
+        <?php endif; ?>
 	<?php endforeach;?>
     </section>
 		
@@ -70,7 +71,7 @@ require_once './archivos/conexion.php';
     <?php 
 	
 	if(isset($_GET["sec"]) && ($_GET["sec"] == "1" || $_GET["sec"] == "3")):
-		$producto = $pdo->query("select id,imagen,nombre,precio from platos where categoria_id=1")->fetchAll(PDO::FETCH_ASSOC);
+		$producto = $pdo->query("select id,imagen,nombre,precio,disponible from platos where categoria_id=1")->fetchAll(PDO::FETCH_ASSOC);
 	
 	?>
     
@@ -78,12 +79,14 @@ require_once './archivos/conexion.php';
     
     <section id="burguers" class="carta">
 		
-	<?php foreach($producto as $p): ?>
+	<?php foreach($producto as $p):
+		if($p["disponible"]==1):
+	?>
         
         <div class="tarjeta_burguer" data-categoria="burgers" data-nombre="la bandida">
             <div class="imagen_burguer">
-                <img src="archivos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
-                <img src="<?php echo $p["imagen"]?>" alt="Burguer La Bandida" class="imagenEncima">
+                <img src="archivos/imagenes/logos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
+                <img src="<?php echo "./archivos/imagenes/platos/".$p["imagen"]?>" alt="Burguer La Bandida" class="imagenEncima">
             </div>
             <div class="info_burguer">
                 <h3><?php echo htmlspecialchars($p['nombre'])?></h3>
@@ -101,7 +104,7 @@ require_once './archivos/conexion.php';
                 <p class="precio"><?php echo $p['precio']?>€</p>
             </div>
         </div>
-	
+		<?php endif;?>
 	<?php endforeach;?>
 	
     </section>
@@ -112,14 +115,17 @@ require_once './archivos/conexion.php';
 	
 	if(isset($_GET["sec"]) && ($_GET["sec"] == "1" || $_GET["sec"] == "3")):
 
-		$producto = $pdo->query("select nombre,precio from platos where categoria_id=4")->fetchAll(PDO::FETCH_ASSOC);
+		$producto = $pdo->query("select nombre,precio,disponible from platos where categoria_id=4")->fetchAll(PDO::FETCH_ASSOC);
 	
 	?>
     
     <div class="patatas">
 		
-		<?php foreach($producto as $p): ?>
+		<?php foreach($producto as $p):
+			if($p["disponible"]==1):
+		?>
         <p><?php echo $p["nombre"]." +".$p["precio"]."€"?></p>
+			<?php endif;?>
 		<?php endforeach;?>
 		
     </div>
@@ -130,7 +136,7 @@ require_once './archivos/conexion.php';
 	
 	if(isset($_GET["sec"]) && ($_GET["sec"] == "1" || $_GET["sec"] == "4")):
 		
-		$producto = $pdo->query("select imagen,nombre,precio from platos where categoria_id=3")->fetchAll(PDO::FETCH_ASSOC);
+		$producto = $pdo->query("select imagen,nombre,precio,disponible from platos where categoria_id=3")->fetchAll(PDO::FETCH_ASSOC);
 	
 	?>
 
@@ -138,19 +144,22 @@ require_once './archivos/conexion.php';
     
     <section id="postres" class="carta">
 		
-		<?php foreach($producto as $p): ?>
+		<?php foreach($producto as $p):
+			if($p["disponible"]==1):
+		?>
         
         <div class="tarjeta_burguer" data-categoria="postres" data-nombre="torrija de brioche">
             <div class="imagen_burguer">
-                <img src="archivos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
-                <img src="<?php echo $p["imagen"] ?>" alt="Torrija de Brioche" class="imagenEncima">
+                <img src="archivos/imagenes/logos/fondo-burguer.png" alt="Hamburguesa" class="imagen-fondo">
+                <img src="<?php echo "./archivos/imagenes/platos/".$p["imagen"] ?>" alt="Torrija de Brioche" class="imagenEncima">
             </div>
             <div class="info_burguer">
                 <h3><?php echo $p["nombre"] ?></h3>
                 <p class="precio"><?php echo $p["precio"] ?>€</p>
             </div>
         </div>
-		
+
+			<?php endif; ?>
 		<?php endforeach; ?>
 		
     </section>
@@ -179,7 +188,7 @@ require_once './archivos/conexion.php';
     </section>
 
     <footer>
-        <img src="archivos/LOGOTIPO LA BANDIDA/ILUSTRACIÓN LA BANDIDA/ISOTIPO LINEAS LIMPIAS/SVG/LA BANDIDA CLEAN LINES.svg"
+        <img src="archivos/imagenes/logos/LOGOTIPO LA BANDIDA/ILUSTRACIÓN LA BANDIDA/ISOTIPO LINEAS LIMPIAS/SVG/LA BANDIDA CLEAN LINES.svg"
             alt="Logo de La Bandida" class="logo-footer">
         <p>De bandidos. Para bandidos.</p>
     </footer>

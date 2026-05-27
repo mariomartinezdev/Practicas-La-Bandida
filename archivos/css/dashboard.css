@@ -81,6 +81,14 @@ h2, h3 {
     margin-bottom: 15px;
 }
 
+
+.subform{
+
+	margin-bottom:15px;
+	font-weight: 600;
+	
+}
+
 .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -129,6 +137,8 @@ h2, h3 {
 .btn-danger:hover { background-color: #c0392b; }
 .btn-warning { background-color: #f39c12; color: white; padding: 5px 10px; font-size: 12px; }
 .btn-warning:hover { background-color: #d35400; }
+.btn-success { background-color: #4ea21f; color: white; padding: 5px 10px; font-size: 12px;}
+.btn-secon{background-color: #34495e; color: white; padding: 5px 10px; font-size: 12px;}
 
 table {
     width: 100%;

@@ -89,7 +89,7 @@ $alergenos_actuales = $pdo->query("SELECT alergeno_id FROM plato_alergenos WHERE
 <head>
     <meta charset="UTF-8">
     <title>Modificar plato</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../archivos/css/dashboard.css">
 </head>
 <body>
 
