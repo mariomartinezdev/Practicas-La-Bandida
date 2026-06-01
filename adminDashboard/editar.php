@@ -7,6 +7,29 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
+function asignarImagen($categoria_id){
+
+	switch($categoria_id){
+
+		case "1":
+			return "placeHolder_hamburguesa.png";
+
+		case "2":
+			return "placeHolderEntrantes.png";
+
+		case "3":
+			return "postrePlace.png";
+
+		default:
+			break;
+						
+	}
+				
+	return "patatas_fritas.jpg";
+
+}
+
+
 $mensaje = "";
 $tipo_mensaje = "success";
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -32,9 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_edit'])) {
         try {
             $pdo->beginTransaction();
 
+            $imagen = isset($_POST["imagen"])?$_POST["imagen"]:asignarImagen($categoria_id);
             // Actualizar tabla principal
-            $stmt_up = $pdo->prepare("UPDATE platos SET nombre = ?, precio = ?, categoria_id = ? WHERE id = ?");
-            $stmt_up->execute([$nombre, $precio, $categoria_id, $id]);
+            $stmt_up = $pdo->prepare("UPDATE platos SET nombre = ?, precio = ?, categoria_id = ?, imagen = ? WHERE id = ?");
+            $stmt_up->execute([$nombre, $precio, $categoria_id,$imagen, $id]);
 
             // Limpiar relaciones previas
             $pdo->prepare("DELETE FROM plato_ingredientes WHERE plato_id = ?")->execute([$id]);
@@ -121,6 +145,11 @@ $alergenos_actuales = $pdo->query("SELECT alergeno_id FROM plato_alergenos WHERE
             <div class="form-group">
                 <label>Precio (€)</label>
                 <input type="number" name="precio" step="0.01" class="form-control" value="<?php echo htmlspecialchars($plato['precio']); ?>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen</label>
+                <input name="imagen" type="file">
             </div>
 
             <div class="form-group">

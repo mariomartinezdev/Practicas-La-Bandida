@@ -272,3 +272,113 @@ h2{
   margin-top: 40px;
   text-transform: uppercase;
 }
+
+/* Ocultar elementos mediante JavaScript */
+.oculto {
+  display: none !important;
+}
+
+/* Menú de categorías */
+.categorias-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categorias-nav .btn-categoria { /* Botones de categoría */
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+/* Estilos para el botón activo y al pasar el cursor */
+.categorias-nav .btn-categoria:hover,
+.categorias-nav .btn-categoria.activo {
+  background-color: #82171b;
+  color: white;
+}
+
+/* Buscador */
+.buscador-menu {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+/* Estilos para el campo de búsqueda */
+#buscar-plato {
+  width: min(420px, 90%);
+  padding: 12px 16px;
+  border: 2px solid #82171b;
+  border-radius: 10px;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+}
+
+/* Estilos para el campo de búsqueda al recibir foco */
+#buscar-plato:focus {
+  outline: 2px solid #82171b;
+  outline-offset: 2px;
+}
+
+/* Mensaje de "Sin resultados" */
+#sin-resultados {
+  text-align: center;
+  font-family: "Comfortaa", sans-serif;
+  color: #82171b;
+  font-weight: bold;
+  margin: 30px 0;
+}
+
+/* Texto accesible para lectores de pantalla (personas con problemas de visión)*/
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Botón volver arriba */
+#volver-arriba {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background-color: #82171b;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Estilos para el botón volver arriba al pasar el cursor */
+#volver-arriba:hover {
+  background-color: #5f1014;
+}
+
+/* Ajustes para móvil */
+@media (max-width: 600px) {
+  .buscador-menu {
+    margin: 14px 0;
+  }
+
+  #buscar-plato {
+    width: 100%;
+  }
+
+  #volver-arriba {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+    font-size: 23px;
+  }
+}
