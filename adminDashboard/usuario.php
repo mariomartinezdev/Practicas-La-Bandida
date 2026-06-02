@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action_edit'])) {
 <head>
     <meta charset="UTF-8">
     <title>Anadir Usuario</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../archivos/css/dashboard.css">
 </head>
 <body>
 

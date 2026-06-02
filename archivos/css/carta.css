@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+body {
+  width: 90%;
+  margin: 0 auto;
+
+  background-color: #eff3ec57;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #f3f3f3 0px,
+    #f3f3f3 1px,  /* Líneas claras cada 1px, añadido a modo de textura */
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  background-color: #ffffff57;
+  border-radius: 1px;
+  margin-top: 20px; 
+  border: 2px solid #82171b;
+}
+
+.nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+}  
+
+.aviso{
+background-color: #eceeea57;
+border-radius: 10px;  
+margin-left: 80%; 
+font-family: 'Comfortaa';
+text-align: center;
+margin-top: 10px;
+border: 2px solid #82171b;
+font-size: 12px;
+
+}
+
+
+
+.patatas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comfortaa';
+  gap: 600px;
+  margin-top: 20px;
+  
+  padding: 10px;
+}
+/* Sección de Contacto */
+#contacto {
+    text-align: center;
+    padding: 30px 15px;
+    background-color: #f9f9f9;
+    margin-top: 40px;
+}
+
+#contacto p {
+    margin: 15px 0;
+}
+
+
+#contacto a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none; 
+}
+
+.categorias-nav button {
+    background-color: transparent;
+    border: none;
+    color: #82171b;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Comfortaa';
+border: 2px solid #82171b;
+margin: 5px;
+
+  
+}
+
+
+#contacto .enlace-mapas {
+    text-decoration: underline;
+}
+
+
+#contacto .enlace-instagram {
+    color: #e1306c;
+    font-weight: bold;
+}
+
+.opciones ul {
+  display: flex;
+ 
+  flex-direction: row;
+}
+.nav-links {
+  margin-left: -8%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*flex-wrap: wrap; para que las opciones se ajusten a la pantalla en dispositivos móviles*/
+#carta{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+
+}
+
+.opciones li{
+list-style: none;
+color: #82171b;
+text-decoration: none;
+}
+
+
+.opciones li a {
+  color: #82171b;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.opciones li a:hover{
+  padding: 5px;
+  border-radius: 10px;
+  color: rgb(255, 196, 0);
+  background-color: #82171b;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.logo img {
+  height: 200px;
+  width: 200px;
+  justify-content: center;
+  padding: 0px;
+  margin: 0px;
+  margin-top: -50px;
+  margin-bottom: -50px;
+
+}
+footer img{
+  width: 50px;
+  height: auto;
+
+}
+footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 20px;
+  
+}
+
+.info_burguer h3 {
+  text-align: center;
+
+}
+
+.imagen_burguer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 9px 9px 0 0;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.imagen_burguer img:not(.imagen-fondo) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 85%;
+  width: auto;
+  z-index: 2;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+
+
+}
+
+.imagen-fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+
+}
+
+.imagenEncima {
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+border-radius: 10%;
+  z-index: 2;
+
+  width: 300px;
+  height: auto;
+}
+
+
+
+.tarjeta_burguer {
+  width: 320px;
+  margin: 0;
+  font-family: 'Comfortaa';
+  display: flex;
+  border: 2px solid #82171b;
+  border-radius: 1px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tarjeta_burguer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(130, 23, 27, 0.15);
+  border-color: #82171b; /* Al hacer hover se intensifica vuestro color */
+}
+
+.precio {
+  font-weight: bold;
+  color: #82171b;
+}
+
+
+/* aqui estará el estilo de la pagina de contacto */
+
+#contacto{
+  font-family: 'Comfortaa';
+}
+
+
+.carta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+/* Los h2 son los titulos para las secciones de la carta, como "Hamburguesas", "Papas Fritas", etc. */
+h2{
+  font-family: 'Comfortaa';
+  text-align: center;
+  color: #82171b;
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+/* Ocultar elementos mediante JavaScript */
+.oculto {
+  display: none !important;
+}
+
+/* Menú de categorías */
+.categorias-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categorias-nav .btn-categoria { /* Botones de categoría */
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+/* Estilos para el botón activo y al pasar el cursor */
+.categorias-nav .btn-categoria:hover,
+.categorias-nav .btn-categoria.activo {
+  background-color: #82171b;
+  color: white;
+}
+
+/* Buscador */
+.buscador-menu {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+/* Estilos para el campo de búsqueda */
+#buscar-plato {
+  width: min(420px, 90%);
+  padding: 12px 16px;
+  border: 2px solid #82171b;
+  border-radius: 10px;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+}
+
+/* Estilos para el campo de búsqueda al recibir foco */
+#buscar-plato:focus {
+  outline: 2px solid #82171b;
+  outline-offset: 2px;
+}
+
+/* Mensaje de "Sin resultados" */
+#sin-resultados {
+  text-align: center;
+  font-family: "Comfortaa", sans-serif;
+  color: #82171b;
+  font-weight: bold;
+  margin: 30px 0;
+}
+
+/* Texto accesible para lectores de pantalla (personas con problemas de visión)*/
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Botón volver arriba */
+#volver-arriba {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background-color: #82171b;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  z-index: 9999; /*Revisar esto, ya que en la version de moviles se pone a la derecha ya hce que no se adapte bien */
+}
+
+/* Estilos para el botón volver arriba al pasar el cursor */
+#volver-arriba:hover {
+  background-color: #5f1014;
+}
+
+/* Ajustes para móvil */
+@media (max-width: 600px) {
+  .buscador-menu {
+    margin: 14px 0;
+  }
+
+  #buscar-plato {
+    width: 100%;
+  }
+
+  #volver-arriba {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+    font-size: 23px;
+  }
+}

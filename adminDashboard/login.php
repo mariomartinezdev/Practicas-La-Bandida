@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <head>
         <title>Administracion</title>
-        <link href="login.css" rel="stylesheet">
+        <link href="../archivos/css/login.css" rel="stylesheet">
     </head>
 
     <body>
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form method="post" action="login.php">
 
-                <img src="../archivos/LOGOTIPO PNG/LOGO COMPLETO LA BANDIDA_Mesa de trabajo 1 copia.png">
+                <img src="../archivos/imagenes/logos/LOGO COMPLETO LA BANDIDA_Mesa de trabajo 1 copia.png">
             
                 <label>Administracion</label>
 
