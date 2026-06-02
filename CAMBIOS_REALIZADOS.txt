@@ -1,0 +1,57 @@
+
+Cambios realizados en el proyecto (carta.php y estilos):
+
+1. Optimización y refactorización de carta.php
+- Se reorganizó el código para evitar duplicación de secciones.
+- Se centralizó la configuración de categorías en arrays dinámicos.
+- Se añadieron funciones reutilizables:
+  - e() para sanitización segura.
+  - obtenerExtras() para evitar consultas repetidas.
+- Se activó strict_types para mejorar robustez.
+- Se mejoró la estructura semántica HTML usando:
+  - main
+  - section
+  - article
+  - nav
+
+2. Mejoras de seguridad
+- Validación segura de parámetros GET con filter_input().
+- Escape de salida con htmlspecialchars().
+- Headers de seguridad:
+  - X-Frame-Options
+  - X-Content-Type-Options
+  - Referrer-Policy
+- Corrección de enlaces externos usando:
+  - rel="noopener noreferrer"
+
+3. Rendimiento y experiencia de usuario
+- Lazy loading en imágenes.
+- CSS optimizado y modernizado.
+- Diseño responsive completo para:
+  - móviles
+  - tablets
+  - pantallas grandes
+- Mejor distribución con CSS Grid.
+- Tarjetas visualmente más modernas.
+- Mejor jerarquía visual y tipografía.
+- Hover effects y sombras modernas.
+
+4. Corrección de bugs visuales
+- Eliminados tamaños fijos problemáticos.
+- Corregido overflow en móviles.
+- Corregidos márgenes inconsistentes.
+- Mejor comportamiento del buscador.
+- Mejor visualización de ingredientes y precios.
+
+5. Accesibilidad
+- Mejoras ARIA.
+- Labels accesibles.
+- Navegación más clara.
+- Mejor contraste visual.
+
+6. Diseño renovado
+- Hero moderno.
+- Botones rediseñados.
+- Cards premium.
+- Contacto rediseñado.
+- Extras organizados correctamente.
