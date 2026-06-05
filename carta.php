@@ -79,8 +79,8 @@ function obtenerExtras(PDO $pdo): array
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Bandida | Carta</title>
     <meta name="description" content="Descubre la carta de La Bandida: burgers, entrantes y postres artesanales.">
-    <link rel="stylesheet" href="./archivos/css/carta.css">
-    <script src="./archivos/script/scriptphp.js" defer></script>
+    <link rel="stylesheet" href="archivos/css/carta.css">
+    <script src="archivos/script/script.js" defer></script>
     <link rel="icon" href="archivos/imagenes/logos/LOGOTIPO LA BANDIDA/ILUSTRACIÓN LA BANDIDA/ISOTIPO LINEAS LAPIZ/PNG/LA BANDIDA RAW LINES@4x-8.png" type="image/x-icon">
 </head>
 

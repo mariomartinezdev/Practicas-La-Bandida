@@ -30,16 +30,28 @@ document.addEventListener("DOMContentLoaded", function () {
       const contenidoBuscable = normalizarTexto(nombre + " " + ingredientes);
 
       const coincideBusqueda = palabrasBuscadas.every(function (palabra) {
-        return contenidoBuscable.includes(palabra);
+
+		let palabras = contenidoBuscable.split(/[ ,]+/);
+
+		for(let p of palabras){
+
+			if(p.slice(0,palabra.length)===palabra){return true;}
+	
+		}
+
+		return false;
+		
       });
 
       const mostrarTarjeta = busqueda === "" || coincideBusqueda;
 
-      tarjeta.classList.toggle("oculto", !mostrarTarjeta);
+	  if(!mostrarTarjeta){
+		  tarjeta.className="oculto";
+	  }else{
+          tarjeta.className="tarjeta_burguer";
+		  numeroResultados++;
+	  }
 
-      if (mostrarTarjeta) {
-        numeroResultados++;
-      }
     });
 
     titulos.forEach(function (titulo) {
