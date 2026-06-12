@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$db   = "bandida";
-$user = "root"; 
-$pass = "";     
+$host = "sql209.byetcluster.com"; // El servidor de tu phpMyAdmin en ByetHost
+$db   = "if0_42105450_bandida";  // Tu nombre de base de datos del hosting
+$user = "if0_42105450";          // Tu usuario de la base de datos
+$pass = "h2Kp08FW9qnQec";     // <-- Pon aquí la contraseña real de tu cuenta de hosting
 $charset = "utf8mb4";
 
 try {

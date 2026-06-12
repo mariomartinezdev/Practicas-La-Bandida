@@ -1,8 +1,8 @@
-drop database if exists bandida;
 
-create database bandida;
 
-use bandida;
+
+
+-- he quitado los 3 primeros comandos para probarlo en elhost gratuito
 
 -- Tabla de Categorías
 CREATE TABLE categorias (

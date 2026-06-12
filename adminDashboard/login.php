@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form method="post" action="login.php">
 
                 <img src="../archivos/imagenes/logos/LOGO COMPLETO LA BANDIDA_Mesa de trabajo 1 copia.png">
-            
+            <br>
                 <label>Administracion</label>
 
 				<?php if (!empty($errores)): ?>

@@ -7,11 +7,37 @@ document.addEventListener("DOMContentLoaded", function () {
   const botonVolverArriba = document.getElementById("volver-arriba");
 
   function normalizarTexto(texto) {
-    return texto
+    return String(texto)
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .trim();
+  }
+
+  function normalizarPrecio(precio) {
+    const precioLimpio = String(precio)
+      .toLowerCase()
+      .replace(/€/g, "")
+      .replace(/\s+/g, "")
+      .replace(/,/g, ".")
+      .replace(/[^0-9.]/g, "");
+
+    if (precioLimpio === "") {
+      return "";
+    }
+
+    const numero = Number(precioLimpio);
+
+    if (Number.isNaN(numero)) {
+      return precioLimpio;
+    }
+
+    return [
+      precioLimpio,
+      numero.toString(),
+      numero.toFixed(2),
+      numero.toFixed(2).replace(".", ",")
+    ].join(" ");
   }
 
   function actualizarBusqueda() {
@@ -27,10 +53,20 @@ document.addEventListener("DOMContentLoaded", function () {
     tarjetas.forEach(function (tarjeta) {
       const nombre = tarjeta.dataset.nombre || "";
       const ingredientes = tarjeta.dataset.ingredientes || "";
-      const contenidoBuscable = normalizarTexto(nombre + " " + ingredientes);
+      const precio = tarjeta.dataset.precio || "";
+
+      const contenidoBuscable = normalizarTexto(
+        nombre + " " + ingredientes + " " + precio
+      );
+      const precioBuscable = normalizarTexto(normalizarPrecio(precio));
 
       const coincideBusqueda = palabrasBuscadas.every(function (palabra) {
-        return contenidoBuscable.includes(palabra);
+        const palabraComoPrecio = normalizarTexto(normalizarPrecio(palabra));
+
+        return (
+          contenidoBuscable.includes(palabra) ||
+          (palabraComoPrecio !== "" && precioBuscable.includes(palabraComoPrecio))
+        );
       });
 
       const mostrarTarjeta = busqueda === "" || coincideBusqueda;
@@ -62,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (mensajeSinResultados) {
       mensajeSinResultados.classList.toggle(
         "oculto",
-        busqueda === "" || numeroResultados !== 0,
+        busqueda === "" || numeroResultados !== 0
       );
     }
   }
@@ -90,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     botonVolverArriba.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     });
 
